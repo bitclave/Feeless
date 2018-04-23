@@ -1,0 +1,20 @@
+#
+# https://github.com/sc-forks/solidity-coverage/blob/master/docs/faq.md
+#
+
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - '8'
+install:
+  - npm install -g truffle
+  - npm install -g ganache-cli
+  - npm install
+script:
+  - npm test
+before_script:
+  - scripts/rpc.sh > /dev/null &
+  - sleep 5
+after_script:
+  - npm run coverage && cat coverage/lcov.info | coveralls

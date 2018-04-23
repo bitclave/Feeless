@@ -1,0 +1,61 @@
+{
+  "name": "Feeless",
+  "version": "1.0.0",
+  "description": "Solidity Contract that allows anyone trustless pay fees for anyone",
+  "main": "y",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "babel-eslint": "^8.2.3",
+    "bip39": "^2.5.0",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-react": "^7.7.0",
+    "ethereumjs-abi": "^0.6.5",
+    "ethereumjs-util": "^5.1.5",
+    "ethereumjs-wallet": "^0.6.0",
+    "web3": "^1.0.0-beta.34",
+    "web3-provider-engine": "^14.0.4",
+    "zeppelin-solidity": "^1.8.0"
+  },
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^2.0.2",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "ganache-core": "^2.1.0",
+    "solidity-coverage": "^0.5.0",
+    "solium": "^1.1.6",
+    "truffle": "^4.1.7"
+  },
+  "scripts": {
+    "test": "truffle test",
+    "coverage": "./node_modules/.bin/solidity-coverage",
+    "rpc": "scripts/rpc.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitclave/MerkleIndividuallyCappedCrowdsale.git"
+  },
+  "keywords": [
+    "bitclave",
+    "solidity",
+    "truffle"
+  ],
+  "author": "BitClave",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bitclave/MerkleIndividuallyCappedCrowdsale/issues"
+  },
+  "homepage": "https://github.com/bitclave/MerkleIndividuallyCappedCrowdsale#readme"
+}
