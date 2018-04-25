@@ -18,14 +18,16 @@ contract Feeless {
         }
     }
 
-    function performFeelessTransaction(address sender, bytes data, uint256 nonce, bytes sig) public payable {
+    function performFeelessTransaction(address sender, address target, bytes data, uint256 nonce, bytes sig) public payable {
+        require(this == target);
+        
         bytes memory prefix = "\x19Ethereum Signed Message:\n32";
-        bytes32 hash = keccak256(prefix, keccak256(data, nonce));
+        bytes32 hash = keccak256(prefix, keccak256(target, data, nonce));
         msgSender = ECRecovery.recover(hash, sig);
         require(msgSender == sender);
-
         require(nonces[msgSender]++ == nonce);
-        require(address(this).call.value(msg.value)(data));
+        
+        require(target.call.value(msg.value)(data));
         msgSender = address(0);
     }
     

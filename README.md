@@ -42,18 +42,19 @@ contract MyToken is StandardToken, Feeless {
 
 Now you can delegate anyone to perform your (wallet1) transaction:
 ```
+const target = myToken.options.address;
 const nonce = await myToken.methods.nonces(wallet1).call();
 const data = await myToken.methods.transfer(wallet2, 5 * 10**18).encodeABI();
-const hash = web3.utils.sha3(data + web3.utils.toBN(nonce).toString(16,64));
+const hash = web3.utils.sha3(target + data.substr(2) + web3.utils.toBN(nonce).toString(16,64));
 const sig = await web3.eth.accounts.sign(hash, wallet1PrivateKey);
 ```
 
 Now receiver (wallet2) is able to pay transaction fees for sender (wallet1):
 ```
-await myToken.performFeelessTransaction(wallet1, data, nonce, sig).send({ from: wallet2 });
+await myToken.performFeelessTransaction(wallet1, target, data, nonce, sig).send({ from: wallet2 });
 ```
 
 # Future
 
 - **Do not have replay-protection**, delegated call can be performed in multiple chains (networks). To implement protection we need to introduce `block.chain_id` variable to EVM: https://github.com/ethereum/EIPs/issues/901
-- Wanna get rid of `msgSender` by adding something like `target.indirectcall(data, nonce, sig)` to EVM
+- Wanna get rid of `msgSender` by adding something like `target.authorizedcall(data, nonce, sig)` to EVM: https://github.com/ethereum/EIPs/issues/1035
