@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.4.24;
 
 import { ECRecovery } from "zeppelin-solidity/contracts/ECRecovery.sol";
 
@@ -22,7 +22,8 @@ contract Feeless {
         require(this == target);
         
         bytes memory prefix = "\x19Ethereum Signed Message:\n32";
-        bytes32 hash = keccak256(prefix, keccak256(target, data, nonce));
+        bytes32 payload = keccak256(abi.encodePacked(target, data, nonce));
+        bytes32 hash = keccak256(abi.encodePacked(prefix, payload));
         msgSender = ECRecovery.recover(hash, sig);
         require(msgSender == sender);
         require(nonces[msgSender]++ == nonce);
